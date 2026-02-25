@@ -1,93 +1,124 @@
-# GitLab to GitHub Repository Mirroring
+#  GitLab to GitHub Repository Mirroring
+
+This project demonstrates how to mirror a GitLab repository to GitHub, ensuring that both repositories remain automatically synchronized.
+
+##  Overview
+
+Repository mirroring allows you to keep two repositories synchronized — for example, pushing code from GitLab to GitHub automatically whenever changes are made.
+
+###  Why Use Repository Mirroring?
+
+- Backup your GitLab repository to GitHub
+- Collaborate across different platforms
+- Maintain public and private copies of the same project
+- Ensure redundancy and availability
+
+#  Step-by-Step Implementation
+
+##  Step 1: Create Repository in GitHub
+
+Create a new repository in GitHub and initialize it with a README file.
+
+![Create repo on GitHub](images/Create%20repo%20on%20GitHub.png)
 
 
+##  Step 2: Create Personal Access Token (Classic)
 
-## Getting started
+Go to:
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+GitHub → Settings → Developer Settings → Personal Access Tokens → Tokens (classic) → Generate New Token
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Grant required permissions (repo access recommended).
 
-## Add your files
+![Create access token on GitHub-1](images/Create%20access%20token%20on%20GitHub-1.png)
 
-* [Create](https://docs.gitlab.com/user/project/repository/web_editor/#create-a-file) or [upload](https://docs.gitlab.com/user/project/repository/web_editor/#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+![Create access token on GitHub-2](images/Create%20access%20token%20on%20GitHub-2.png)
 
+After generating the token, copy it immediately. You will use it as a password in GitLab mirror configuration.
+
+
+##  Step 3: Create Blank Project in GitLab
+
+1. Go to GitLab
+2. Click **New Project**
+3. Choose **Blank Project**
+4. Initialize repository with README
+
+
+![Create Blank Project on GitLab](images/Create%20Blank%20Project%20on%20GitLab.png)
+
+
+##  Step 4: Add New Mirror Repository in GitLab
+
+Go to:
+
+Project → Settings → Repository → Mirroring Repositories
+
+Click **Mirror Repository**
+
+Use this format for Git repository URL:
+https://<GITHUB_USERNAME>@github.com/<GITHUB_USERNAME>/<GITHUB_REPO>.git
+
+![Add a new mirror repo on GitLab](images/Add%20a%20new%20mirror%20repo%20on%20GitLab.png)
+
+
+##  Step 5: Use GitHub Token as Password
+
+When prompted for password:
+
+- Username → Your GitHub username
+- Password → Paste GitHub Personal Access Token
+
+![use password(token) in mirror repo on gitlab](images/use%20password(token)%20in%20mirror%20repo%20on%20gitlab.png)
+
+Click **Mirror repository** to complete setup.
+
+## 🔹 Step 6: Clone GitLab Repository & Push Code
+
+Clone repository:
+
+```bash
+git clone https://gitlab.com/<GITLAB_USERNAME>/<GITLAB_REPO>.git
+cd <REPO_NAME>
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/iampreranalambhate/gitlab-to-github-repository-mirroring.git
-git branch -M main
-git push -uf origin main
+
+Create and push a file:
+```bash
+cat index.html
 ```
 
-## Integrate with your tools
+Add content: 
+```bash
+<h1>This is my mirror repo project</h1>
+```
 
-* [Set up project integrations](https://gitlab.com/iampreranalambhate/gitlab-to-github-repository-mirroring/-/settings/integrations)
+Commit and push: 
+```bash
+git add index.html
+git commit -m "index.html file added"
+git push -u origin main
+```
 
-## Collaborate with your team
+##  Output Verification
 
-* [Invite team members and collaborators](https://docs.gitlab.com/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/user/project/merge_requests/creating_merge_requests/)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/user/project/issues/managing_issues/#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+1. File in GitLab Repository
 
-## Test and Deploy
+![file in your GitLab repository](images/file%20in%20your%20GitLab%20repository.png)
 
-Use the built-in continuous integration in GitLab.
+2. Add Any One File and Push on GitLab
 
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/topics/autodevops/requirements/)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ci/environments/protected_environments/)
+![add any one file and push on gitlab](images/add%20any%20one%20file%20and%20push%20on%20gitlab.png)
 
-***
+3. Done Successfully (Mirrored to GitHub)
 
-# Editing this README
+![done successfully](images/done%20successfully.png)
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+Now the same file will automatically appear in your GitHub repository because of push mirroring.
 
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+##  Conclusion
+By configuring GitLab push mirroring:
+* Your GitLab repository automatically syncs with GitHub
+* Every commit pushed to GitLab is reflected in GitHub
+* Your project stays backed up and synchronized
+* Collaboration across platforms becomes easier
+* GitLab’s push mirror feature makes the workflow automated, secure, and efficient.
